@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Board from "./Board";
+import Gameinfo from "./Gameinfo";
 import Gamelogic from "./Gamelogic";
 import History from "./History";
 function App() {
@@ -10,11 +11,6 @@ function App() {
   const current = history[currentuser];
 
   const winner = Gamelogic(current.board);
-  const msg = winner
-    ? `Winner is ${winner}`
-    : current.isnext
-    ? `Next player is X`
-    : `Next player is O`;
 
   function handleClick(position) {
     if (current.board[position] || winner) return;
@@ -35,8 +31,7 @@ function App() {
   return (
     <div className="app">
       <h1>TIC TAC TOE</h1>
-      <h2>{msg}</h2>
-
+      <Gameinfo current={current} winner={winner} />
       <Board board={current.board} handleClick={handleClick} />
       <History history={history} moveto={moveto} currentuser={currentuser} />
     </div>
