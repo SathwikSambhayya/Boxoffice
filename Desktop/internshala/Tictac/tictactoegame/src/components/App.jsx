@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Board from "./Board";
 import Gamelogic from "./Gamelogic";
+import History from "./History";
 function App() {
   const [history, setHistory] = useState([
     { board: Array(9).fill(null), isnext: true },
@@ -27,6 +28,9 @@ function App() {
     });
     setcurrentuser((prev) => prev + 1);
   }
+  function moveto(move) {
+    setcurrentuser(move);
+  }
 
   return (
     <div className="app">
@@ -34,6 +38,7 @@ function App() {
       <h2>{msg}</h2>
 
       <Board board={current.board} handleClick={handleClick} />
+      <History history={history} moveto={moveto} currentuser={currentuser} />
     </div>
   );
 }
